@@ -172,12 +172,7 @@ func (auth *v2Auth) Request(ctx context.Context, c *Connection) (*http.Request, 
 	if err != nil {
 		return nil, err
 	}
-	url := c.AuthUrl
-	if !strings.HasSuffix(url, "/") {
-		url += "/"
-	}
-	url += "tokens"
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bytes.NewBuffer(body))
+	req, err := http.NewRequestWithContext(ctx, "POST", c.AuthUrl, bytes.NewBuffer(body))
 	if err != nil {
 		return nil, err
 	}
